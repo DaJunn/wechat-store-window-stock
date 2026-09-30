@@ -1,0 +1,4 @@
+interface:
+  display_name: "橱窗库存巡检"
+  short_description: "扫微信小店带货助手橱窗库存，挑出0库存/低库存商品并输出商品短链与补货清单"
+  default_prompt: "Use $wechat-store-window-stock to 扫一遍橱窗，把 0 库存的商品和链接列出来。"
