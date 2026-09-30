@@ -1,7 +1,7 @@
 # 橱窗库存巡检 · 接口与 DOM 参考
 
 来源：2026-09 实测 `store.weixin.qq.com/talent/channel/window`（带货助手身份，橱窗 124 个商品）。
-改 `scripts/window-stock.mjs` 前先读这里。所有字段都是实测值，没有猜的。
+改 `scripts/window-stock.mjs` 前先读这里。以下为历史实测字段与页面结构，平台更新后需重新核对。
 
 ## 目录
 
@@ -107,7 +107,7 @@ https://mp.weixin.qq.com/a/~~IMkNL7ou8nE~GFvxQ8FFCysH-ThbRMTCwA~~
 
 - 解出来的是**小程序短链**，只能在微信里打开，桌面浏览器直接访问会失败。
 - `lifespan: 43200`（12 小时）。**每次调用都生成一个新的短码**——同一商品两次跑出来的链接不同，别把它当稳定 ID 入库。
-- 二维码指向的是「选品广场 · 商品详情」小程序页 `/pool/pages/detail/index`，带 `entrance=8`。
+- 二维码指向的是「选品广场 · 商品详情」小程序页 `/pool/pages/detail/index`，带 `entrance=8`。不保证是面向消费者的购买页，接收者可能需要相应登录身份。
 
 ## 4. 字段与单位
 
@@ -126,7 +126,7 @@ https://mp.weixin.qq.com/a/~~IMkNL7ou8nE~GFvxQ8FFCysH-ThbRMTCwA~~
 | `cpsLink` | 机构链接标识 | 形如 `weixinstoresubhs/6000000016856444` |
 | `platformName` | 店铺名 | — |
 
-`isHide` + `stock=0` + `statusWording=推广中` = 挂着的死链，最高优先级处理。
+`isHide=false` + `stock=0` + `statusWording=推广中` = 仍展示但无库存的商品，优先核对补货或隐藏。库存缺失不能按 0 处理。
 
 ## 5. DOM 兜底路径
 
